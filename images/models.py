@@ -16,10 +16,13 @@ class Image(models.Model):
     
     # many-to-many relationships
     users_like = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='images_liked', blank=True)
+    # chapitre 7 using signals for denormalized count 
+    total_likes = models.PositiveIntegerField(default=0)
     
     class Meta:
         indexes = [
             models.Index(fields=['-created']),
+            models.Index(fields=['-total_likes']),
         ]
         ordering = ['-created']
         

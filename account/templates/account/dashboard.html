@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
 {% block title %}Dashboard{% endblock %}
+
 {% block content %}
     <h1>Dashboard</h1>
     {% with total_images_created=request.user.images_created.count %}
@@ -11,4 +13,10 @@
     <p>
         You can also <a href="{% url "edit" %}">edit your profile</a> or <ahref="{% url "password_change" %}">change your password</a>.
     </p>
+    <h2>What's happening</h2>
+    <div id="action-list">
+        {% for action in actions %}
+            {% include "actions/action/detail.html" %}
+        {% endfor %}
+    </div>
 {% endblock %}

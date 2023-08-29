@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,10 +43,13 @@ INSTALLED_APPS = [
     'django_extensions',
     'images.apps.ImagesConfig', #this is to activate de image application in de bookmark projet
     'easy_thumbnails',
+    'actions.apps.ActionsConfig',
+    'debug_toolbar',
     
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -187,3 +192,18 @@ if DEBUG:
     import mimetypes
     mimetypes.add_type('application/javascript', '.js', True)
     mimetypes.add_type('text/css', '.css', True)
+    
+# c'est pur ajouter dynamiquement la methode get_absolute_url à une classe
+ABSOLUTE_URL_OVERRIDES = {'auth.user': lambda u: reverse_lazy('user_detail',args=[u.username])}
+# in order to obtain debug information in the shell FOR ny difficulty generating thumbnail
+THUMBNAIL_DEBUG = True
+
+# this is for django debug toolbar
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
+
+# Integration of redis in settings file
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
