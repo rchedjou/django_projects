@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
     # 'debug_toolbar',
 ]
 
@@ -155,4 +156,15 @@ EMAIL_USE_TLS = True
 
 # if you want to send eamil to shel console 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+
+# integration a payement method on my shop
+# Stripe settings
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51NlrDqKWfkyyRB6guShgbDowSyOO0ecGUeM2Vc5le57LQih6IOYDelrFltl6hN0aUTiS3JUjSXkirbvRbU4H6Lw1009ONw89SM' # Publishable key
+STRIPE_SECRET_KEY = 'sk_test_51NlrDqKWfkyyRB6g3RziwydrU6CDtQr8dnI9p75TgoyaV5CfbGGtEAMQZQD2LFVv0nbLlwhOQo0fndr19emkIvOs00wmkYla2g'
+# Secret key
+STRIPE_API_VERSION = '2023-08-16'
+
+STRIPE_WEBHOOK_SECRET = 'whsec_fbfad550e18909c64f242b8c7dba56533ba3a599fda789d54ff2b0c099e82e62'
+
+STATIC_ROOT = BASE_DIR / 'static'
 
